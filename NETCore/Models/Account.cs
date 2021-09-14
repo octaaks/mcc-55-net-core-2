@@ -19,7 +19,7 @@ namespace NETCore.Models
         [JsonIgnore]
         public virtual Person Person { get; set; }
 
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual Profiling Profiling { get; set; }
 
         public Account(string nIK, string password)

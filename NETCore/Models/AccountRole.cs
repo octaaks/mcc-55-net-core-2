@@ -18,7 +18,7 @@ namespace NETCore.Models
         [JsonIgnore]
         public virtual Account Account { get; set; }
         public int RoleId { get; set; }
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual Role Role { get; set; }
 
         //public AccountRole(string nik, int roleId)

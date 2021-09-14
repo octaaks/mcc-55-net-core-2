@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Star Wars";
+    ViewData["Title"] = "Pokemon";
 }
 <html>
 <head>
@@ -15,7 +15,7 @@
                 <span><img class="top-img" src="https://i.kym-cdn.com/entries/icons/original/000/029/079/hellothere.jpg" alt="General Kenobi" /></span>
             </div>
             <div class="col-10">
-                <h3 id="judul" style="font-family: 'Star Jedi'; text-align:start;">"Hello There"</h3>
+                <h3 id="judul" style="font-family: 'Star Jedi'; text-align:start;">Pokemon</h3>
             </div>
         </div>
         <div class="card shadow p-3 mt-3 p-lg-3">
@@ -24,8 +24,7 @@
                     <tr>
                         <th scope="col">No</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Gender</th>
-                        <th scope="col">Height</th>
+                        <th scope="col">URL</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -36,27 +35,23 @@
 
         <!-- Modal 1-->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-md modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div id="modal-content" class="modal-body">
-
+                        <div class="text-center mb-3" id="imgpoke">
+                        </div>
                         <div class="row">
                             <div class="col-3 font-weight-bold">
                                 <div>Name</div>
-                                <div>Gender</divclass="font-weight-bold">
                                 <div>Height</div>
-                                <div>Mass</div>
-                                <div>Hair Color</div>
-                                <div>Skin Color</div>
-                                <div>Birth Year</div>
+                                <div>Weight</div>
+                                <div>Ability</div>
                             </div>
                             <div class="col-1">
-                                <div>:</div>
-                                <div>:</div>
                                 <div>:</div>
                                 <div>:</div>
                                 <div>:</div>
@@ -69,36 +64,15 @@
                         </div>
 
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Modal 2-->
-        <div class="modal fade" id="filmsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="filmModalLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div id="modal-content" class="modal-body">
-                        <ul>
-                            <li id="filmList"></li>
-                        </ul>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        @*<button type="button" class="btn btn-primary">Save changes</button>*@
-                    </div>
-                </div>
-            </div>
         </div>
-
-    </div>
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -107,21 +81,17 @@
 <script>
     //show all data into table
     $.ajax({
-        url: "https://swapi.dev/api/people/"
+        url: "https://pokeapi.co/api/v2/pokemon"
     }).done((result) => {
         var text = "";
         $.each(result.results, function (key, val) {
             text += `<tr>
                 <td>${key + 1}</td>
                 <td>${val.name}</td>
-                <td>${val.gender}</td>
-                <td>${val.height} cm</td>
+                <td>${val.url}</td>
                 <td>
                     <button type="button" onclick="show('${val.url}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                       Details
-                    </button>
-                    <button type="button" onclick="film('${val.url}')" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#filmsModal">
-                      Films
                     </button>
                 </td>
             </tr>`
@@ -138,41 +108,24 @@
         }).done((result) => {
             var text = "";
             text += `<div>${result.name}</div>
-            <div>${result.gender}</div>
             <div>${result.height}</div>
-            <div>${result.mass}</div>
-            <div>${result.hair_color}</div>
-            <div>${result.skin_color}</div>
-            <div>${result.birth_year}</div>
+            <div>${result.weight}</div>
+            <div>${result.abilities[0].ability.name}</div>
+            <div>${result.abilities[1].ability.name}</div>
         `
             console.log(result);
 
+            var img = "";
+            img += `<img  class="text-center" src="${result.sprites.other.dream_world.front_default}">`;
+
+            console.log(result.sprites.front_default);
+
             $("#modal-data").html(text);
+            $("#imgpoke").html(img);
             $("#exampleModalLabel").html(result.name + "'s Profile");
         }).fail((result) => {
             console.log(result);
         });
     }
 
-    //show char's films
-    function film(url) {
-        $.ajax({
-            url: url
-        }).done((result) => {
-            var text = "";
-
-            for (let i = 0; i < result.films.length; i++) {
-                $.getJSON(result.films[i], function (data) {
-                    console.log(data);
-                    text += `<li><a href="${result.films[i]}"> ${data.title} </a> - Release date : ${moment(data.release_date, "YYYY")}</li>`;
-                    $("#filmList").html(text);
-                });
-            }
-
-            $("#filmModalLabel").html(result.name + "'s Films");
-
-        }).fail((result) => {
-            console.log(result);
-        });
-    }
 </script>

@@ -26,7 +26,7 @@ namespace NETCore.Models
         }
         [JsonConverter(typeof(StringEnumConverter))]
         public Gender gender { get; set; }
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual Account Account { get; set; }
 
         /*public Person(string nIK, string firstName, string lastName, string phone, DateTime birthDate, int salary, string email)

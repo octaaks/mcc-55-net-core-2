@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace NETCore.Models
@@ -14,14 +15,13 @@ namespace NETCore.Models
         [Required]
         public int UniversityId { get; set; }
         public virtual University Universities { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Profiling> Profilings { get; set; }
-
         public Education(string degree, string gPA)
         {
             Degree = degree;
             GPA = gPA;
         }
-
         public Education(string degree, string gPA, int universityId) : this(degree, gPA)
         {
             UniversityId = universityId;
