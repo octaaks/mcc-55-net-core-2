@@ -24,6 +24,13 @@ namespace ImplementCors
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            //CORS
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+                //c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44300"));
+                //c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44359"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +52,8 @@ namespace ImplementCors
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(options => options.AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {
