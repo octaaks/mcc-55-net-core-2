@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="~/css/latihan.css" />
 </head>
 <body>
     <h1 id="judul">HELLO THERE</h1>
@@ -47,22 +48,3 @@
     </div>
 </body>
 </html>
-<script src="https://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.min.js" type="text/javascript"></script>
-<script>
-    $.ajax({
-        url: "https://swapi.dev/api/people"
-    }).done((result) => {
-        console.log(result);
-        console.log(result.results[2]);
-
-        var text = "";
-        $.each(result.results, function (key, val) {
-            text += `<tr>
-                        <td>$(key)</td>
-                     </tr>`;
-        });
-        $("#swapi").html(text);
-    }).fail((result) => {
-        console.log(result);
-    });
-</script>

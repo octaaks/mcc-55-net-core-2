@@ -4,6 +4,7 @@ using NETCore.Models;
 using NETCore.ViewModel;
 using System.Collections.Generic;
 using System.Linq;
+using static NETCore.Models.Person;
 
 namespace NETCore.Repository.Data
 {
@@ -35,7 +36,7 @@ namespace NETCore.Repository.Data
                                     LastName = p.LastName,
                                     Phone = p.Phone,
                                     BirthDate = p.BirthDate,
-                                    //gender = (PersonVM.Gender)p.gender,
+                                    gender = (PersonVM.Gender)p.gender,
                                     Salary = p.Salary,
                                     Email = p.Email,
                                     //Password = a.Password,
@@ -70,7 +71,7 @@ namespace NETCore.Repository.Data
                                     Phone = p.Phone,
                                     BirthDate = p.BirthDate,
                                     /*gender = p.gender.getS,*/
-                                    //gender = (PersonVM.Gender)p.gender,
+                                    gender = (PersonVM.Gender)p.gender,
                                     Salary = p.Salary,
                                     Email = p.Email,
                                     //Password = a.Password,
@@ -117,7 +118,7 @@ namespace NETCore.Repository.Data
                 }
                 person.BirthDate = personVM.BirthDate;
                 person.Salary = personVM.Salary;
-                //person.gender = (Gender)personVM.gender;
+                person.gender = (Gender)personVM.gender;
                 myContext.Persons.Add(person);
                 myContext.SaveChanges();
 

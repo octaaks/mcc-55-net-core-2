@@ -50,12 +50,12 @@ p{
     transition: 1s;
 }
 
-li {
+li /*{
     font-family: '8BIT WONDER Nominal';
     text-size-adjust: 200%;
     font-weight: 100;
     transition: background-position 275ms ease;
-}
+}*/
 li:hover {
     color:darkgrey;
     text-size-adjust: 300%;
