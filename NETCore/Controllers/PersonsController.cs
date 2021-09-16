@@ -66,7 +66,6 @@ namespace NETCore.Controllers
         /// <returns></returns>
         ///
 
-        [EnableCors("AllowOrigin")]
         [Authorize]
         [HttpGet("GetPerson/{NIK}")]
         public ActionResult GetPerson(string NIK)
@@ -100,6 +99,7 @@ namespace NETCore.Controllers
         /// <param name="personVM"></param>
         /// <returns></returns>
         [AllowAnonymous]
+        [EnableCors("AllowAllOrigins")]
         [HttpPost("Register")]
         public ActionResult Insert(PersonVM personVM)
         {

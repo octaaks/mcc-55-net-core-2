@@ -226,3 +226,4 @@ F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Impl
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\ImplementCors.genruntimeconfig.cache
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Poke\Index.cshtml.g.cs
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Persons\Index.cshtml.g.cs
+F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutAdmin.cshtml.g.cs

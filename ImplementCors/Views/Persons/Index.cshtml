@@ -1,4 +1,5 @@
 ﻿@{
+    Layout = (string)ViewData["Layout"] ?? "_LayoutAdmin";
     ViewData["Title"] = "Persons API";
 }
 <html>
@@ -9,6 +10,7 @@
     @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">*@
     <!-- CSS Bootstrap Datepicker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/css/persons.css" />
 </head>
 <body>
     <div class="container">
@@ -17,7 +19,8 @@
                 <h3 id="judul" style="font-family: HACKED; text-align:start;">Persons api</h3>
             </div>
             <div class="col">
-                <button class="btn btn-primary" style="float:right" data-bs-toggle="modal" data-bs-target="#registerModal">Register <i class="fas fa-plus ml-2"></i></button>
+                <button class="btn btn-primary ml-3" style="float:right" data-bs-toggle="modal" data-bs-target="#registerModal">Register <i class="fas fa-plus ml-2"></i></button>
+                <button class="btn btn-secondary" style="float:right" id="reloadBtn">Reload <i class="fas fa-sync-alt ml-2"></i></button>
             </div>
         </div>
 
@@ -115,180 +118,183 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div id="modal-content" class="modal-body">
-                        @*<form class="needs-validation" novalidate>*@
 
-                        <div class="form-row">
-                            <div class="col mb-3">
-                                <label for="inputNik">NIK</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="inputNik" placeholder="NIK" aria-describedby="inputGroupPrepend" required>
-                                    <div class="invalid-feedback">
-                                        Please type your NIK.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <form method="post" action="" id="contactform" class="needs-validation" novalidate>
 
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
-                                <label for="inputFirstName">First name</label>
-                                <input type="text" class="form-control" id="inputFirstName" placeholder="First name" value="" required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="inputLastName">Last name</label>
-                                <input type="text" class="form-control" id="inputLastName" placeholder="Last name" value="" required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-md mb-3">
-                                <label for="inputEmail">Email</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="inputEmail" placeholder="Email" aria-describedby="inputGroupPrepend" required>
-                                    <div class="invalid-feedback">
-                                        Please type an email.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md mb-3">
-                                <label for="inputPassword">Password</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="inputPassword" placeholder="Password" aria-describedby="inputGroupPrepend" required>
-                                    <div class="invalid-feedback">
-                                        Please insert your password.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md mb-3">
-                                <label for="inputPhone">Phone</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="inputPhone" placeholder="Phone" aria-describedby="inputGroupPrepend" required>
-                                    <div class="invalid-feedback">
-                                        Please type a phone number.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-md mb-3">
-                                <label for="inputGender">Gender</label>
-                                <div class="input-group">
-                                    @*<input type="text" class="form-control" id="validationGender" placeholder="Gender" aria-describedby="inputGroupPrepend" required>
+                            <div class="form-row">
+                                <div class="col mb-3">
+                                    <label for="inputNik">NIK</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="inputNik" placeholder="NIK" aria-describedby="inputGroupPrepend" autocomplete="off" autocorrect="off"
+                                               autocapitalize="off" spellcheck="false" required>
+                                        <p class="validation-message" id="invalid-nik"></p>
                                         <div class="invalid-feedback">
-                                            Please insert gender.
+                                            Please type your NIK.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="inputFirstName">First name</label>
+                                    <input type="text" class="form-control" id="inputFirstName" placeholder="First name" value="" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="inputLastName">Last name</label>
+                                    <input type="text" class="form-control" id="inputLastName" placeholder="Last name" value="" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md mb-3">
+                                    <label for="inputEmail">Email</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="inputEmail" placeholder="Email" aria-describedby="inputGroupPrepend" required>
+                                        <div class="invalid-feedback">
+                                            Please type an email.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md mb-3">
+                                    <label for="inputPassword">Password</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="inputPassword" placeholder="Password" aria-describedby="inputGroupPrepend" required>
+                                        <div class="invalid-feedback">
+                                            Please insert your password.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md mb-3">
+                                    <label for="inputPhone">Phone</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="inputPhone" placeholder="Phone" aria-describedby="inputGroupPrepend" required>
+                                        <div class="invalid-feedback">
+                                            Please type a phone number.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md mb-3">
+                                    <label for="inputGender">Gender</label>
+                                    <div class="input-group">
+                                        @*<input type="text" class="form-control" id="validationGender" placeholder="Gender" aria-describedby="inputGroupPrepend" required>
+                                            <div class="invalid-feedback">
+                                                Please insert gender.
+                                            </div>*@
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" value="0" id="inputGender1" checked>
+                                            <label class="form-check-label" for="inputGender1">
+                                                Male
+                                            </label>
+                                        </div>
+                                        <div class="form-check ml-4">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" value="1" id="inputGender2">
+                                            <label class="form-check-label" for="inputGender2">
+                                                Female
+                                            </label>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please insert date of birth.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md mb-3">
+                                    <label for="inputBirthDate">BirthDate</label>
+                                    @*<div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+                                            </div>
+                                            <input type="text" class="form-control" id="inputBirthDate" placeholder="Birth Date" aria-describedby="inputGroupPrepend" required>
+                                            <div class="invalid-feedback">
+                                                Please insert date of birth.
+                                            </div>
                                         </div>*@
+                                    <div class="input-group date" data-provide="datepicker">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+                                        </div>
+                                        <input type="text" class="form-control datepicker" data-date-format="yyyy-mm-dd" id="inputBirthDate" placeholder="Birth Date">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please insert date of birth.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" value="0" id="inputGender1" checked>
-                                        <label class="form-check-label" for="inputGender1">
-                                            Male
-                                        </label>
-                                    </div>
-                                    <div class="form-check ml-4">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" value="1" id="inputGender2">
-                                        <label class="form-check-label" for="inputGender2">
-                                            Female
-                                        </label>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Please insert date of birth.
+                            <div class="form-row">
+                                <div class="col-md mb-3">
+                                    <label for="inputSalary">Salary</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="inputSalary" placeholder="Salary" aria-describedby="inputGroupPrepend" required>
+                                        <div class="invalid-feedback">
+                                            Please insert your salary.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="form-row">
-                            <div class="col-md mb-3">
-                                <label for="inputBirthDate">BirthDate</label>
-                                @*<div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+                            <div class="form-row">
+                                <div class="col-md mb-3">
+                                    <label for="inputUniversity">University</label>
+                                    <div class="input-group">
+                                        @*<input type="text" class="form-control" id="validationUniversity" placeholder="University" aria-describedby="inputGroupPrepend" required>*@
+                                        <select class="custom-select my-1 mr-sm-2" id="inputUniversity" placeholder="University" required>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please insert university.
+                                        </div>
                                     </div>
-                                    <input type="text" class="form-control" id="inputBirthDate" placeholder="Birth Date" aria-describedby="inputGroupPrepend" required>
-                                    <div class="invalid-feedback">
-                                        Please insert date of birth.
+                                </div>
+                                <div class="col-md mb-3">
+                                    <label for="inputDegree">Degree</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="inputDegree" placeholder="Degree" aria-describedby="inputGroupPrepend" required>
+                                        <div class="invalid-feedback">
+                                            Please insert your degree.
+                                        </div>
                                     </div>
-                                </div>*@
-                            <div class="input-group date" data-provide="datepicker">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
                                 </div>
-                                <input type="text" class="form-control datepicker" data-date-format="yyyy-mm-dd" id="inputBirthDate" placeholder="Birth Date">
-                                <div class="input-group-addon">
-                                    <span class="glyphicon glyphicon-th"></span>
-                                </div>
-                                <div class="invalid-feedback">
-                                    Please insert date of birth.
+                                <div class="col-md mb-3">
+                                    <label for="inputGpa">GPA</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="inputGpa" placeholder="GPA" aria-describedby="inputGroupPrepend" required>
+                                        <div class="invalid-feedback">
+                                            Please insert your GPA.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                        </div>
 
-                        <div class="form-row">
-                            <div class="col-md mb-3">
-                                <label for="inputSalary">Salary</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="inputSalary" placeholder="Salary" aria-describedby="inputGroupPrepend" required>
+                            <div class="form-group mt-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                    <label class="form-check-label" for="invalidCheck">
+                                        Agree to terms and conditions
+                                    </label>
                                     <div class="invalid-feedback">
-                                        Please insert your salary.
+                                        You must agree before submitting.
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-md mb-3">
-                                <label for="inputUniversity">University</label>
-                                <div class="input-group">
-                                    @*<input type="text" class="form-control" id="validationUniversity" placeholder="University" aria-describedby="inputGroupPrepend" required>*@
-                                    <select class="custom-select my-1 mr-sm-2" id="inputUniversity" placeholder="University" required>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Please insert university.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md mb-3">
-                                <label for="inputDegree">Degree</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="inputDegree" placeholder="Degree" aria-describedby="inputGroupPrepend" required>
-                                    <div class="invalid-feedback">
-                                        Please insert your degree.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md mb-3">
-                                <label for="inputGpa">GPA</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="inputGpa" placeholder="GPA" aria-describedby="inputGroupPrepend" required>
-                                    <div class="invalid-feedback">
-                                        Please insert your GPA.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group mt-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                <label class="form-check-label" for="invalidCheck">
-                                    Agree to terms and conditions
-                                </label>
-                                <div class="invalid-feedback">
-                                    You must agree before submitting.
-                                </div>
-                            </div>
-                        </div>
-                        @*<button id="register" class="btn btn-primary" type="submit">Submit form</button>*@
-                        <button id="register" class="btn btn-primary">Submit form</button>
-                        @*</form>*@
+                            @*<button id="register" class="btn btn-primary" type="submit">Submit form</button>*@
+                            <button id="register" type="submit" class="btn btn-primary">Submit form</button>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -300,11 +306,7 @@
     </div>
 </body>
 </html>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<!-- Javascript Bootstrap -->
-@*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>*@
-<!-- Javascript Bootstrap Datepicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
 <script>
     $('.datepicker').datepicker({
@@ -313,6 +315,27 @@
 
     $(document).ready(function () {
 
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+        //DATATABLEs
         var mt = $('#table_id').DataTable({
             "columnDefs": [{
                 "targets": 0,
@@ -366,6 +389,112 @@
             });
         }).draw();
 
+        $("#register").click(function (event) {
+
+
+            event.preventDefault();
+
+            var fields = [
+                document.getElementsByTagName("input")
+            ];
+
+            for (var i = 0; i < fields.length; i++) {
+                if (fields[i].value == "") {
+                    fields[i].placeholder == "Tidak boleh kosong"
+                    console.log(fields[i].placeholder);
+                }
+            };
+
+            //var data = $('.form-data').serialize();
+            var nik = document.getElementById("inputNik").value;
+            //if (nik == "") {
+            //    $('#invalid-nik').html('Please insert your NIK!');
+            //}
+            var firstName = document.getElementById("inputFirstName").value;
+            var lastName = document.getElementById("inputLastName").value;
+            var email = document.getElementById("inputEmail").value;
+            var password = document.getElementById("inputPassword").value;
+            var phone = document.getElementById("inputPhone").value;
+
+            var genders = document.getElementsByName("flexRadioDefault");
+            for (var i = 0; i < genders.length; i++) {
+                if (genders[i].checked) {
+                    var gender = genders[i].value;
+                }
+            }
+            console.log("gender: " + gender);
+
+            var phone = document.getElementById("inputPhone").value;
+            //var birthDate = "1911-11-11T00:00:00";
+            var birthDate = document.getElementById("inputBirthDate").value;
+            var salary = document.getElementById("inputSalary").value;
+            var university = document.getElementById("inputUniversity").value;
+            var degree = document.getElementById("inputDegree").value;
+            var gpa = document.getElementById("inputGpa").value;
+
+            var dataInput = {
+                "nik": nik,
+                "firstName": firstName,
+                "lastName": lastName,
+                "phone": phone,
+                "birthDate": birthDate,
+                "gender": parseInt(gender),
+                "salary": parseInt(salary),
+                "email": email,
+                "password": password,
+                "degree": degree,
+                "GPA": gpa,
+                "UniversityId": parseInt(university)
+            };
+
+            var json = JSON.stringify(dataInput);
+            console.log(json);
+
+            $.ajax({
+                url: 'https://localhost:44300/api/persons/register',
+                method: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(dataInput),
+                success: function (data) {
+                    console.log(data);
+
+                    $('#contactform')[0].reset();
+                    $('#registerModal').modal('toggle');
+
+                    Swal.fire(
+                        'Good job!',
+                        'You clicked the button!',
+                        'success'
+                    );
+
+                    mt.ajax.reload(function (json) {
+                        $('#table_id').val(json.lastInput);
+                    });
+                    //location.reload();
+                },
+                error: function (xhr, status, error) {
+                    var err = eval(xhr.responseJSON);
+                    console.log(err.message);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                        //footer: '<a href="">Why do I have this issue?</a>'
+                    });
+                    //document.getElementById("inputUniversity").className = "form-control is-invalid";
+                    //$("#messageUniv").html(` ${err.errors.Name[0]}`);
+                }
+            });
+        });
+
+        //reload button
+        $("#reloadBtn").click(function () {
+            mt.ajax.reload(function (json) {
+                $('#table_id').val(json.lastInput);
+            });
+        });
+
     });
 
     //get all university
@@ -383,34 +512,6 @@
     }).fail((result) => {
         console.log(result);
     });
-
-    //show all data into table
-
-    //$.ajax({
-    //    url: "https://localhost:44300/api/persons/"
-    //}).done((result) => {
-    //    var text = "";
-
-    //    console.log(result);
-    //    $.each(result.data, function (key, val) {
-    //        text += `<tr>
-    //            <td>${key + 1}</td>
-    //            <td>${val.nik}</td>
-    //            <td>${val.firstName + " " + val.lastName}</td>
-    //            <td>${val.email}</td>
-    //            <td>${val.gender}</td>
-    //            <td>${val.phone}</td>
-    //            <td>
-    //                <button type="button" onclick="show('https://localhost:44300/api/persons/${val.nik}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    //                  Details
-    //                </button>
-    //            </td>
-    //        </tr>`
-    //    });
-    //    $("#swapi").html(text);
-    //}).fail((result) => {
-    //    console.log(result);
-    //});
 
     $.ajax({
         url: "https://localhost:44300/api/persons/getperson"
@@ -460,96 +561,5 @@
             console.log(result);
         });
     }
-
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-
-    $("#register").click(function () {
-        //var data = $('.form-data').serialize();
-
-        var nik = document.getElementById("inputNik").value;
-        var firstName = document.getElementById("inputFirstName").value;
-        var lastName = document.getElementById("inputLastName").value;
-        var email = document.getElementById("inputEmail").value;
-        var password = document.getElementById("inputPassword").value;
-        var phone = document.getElementById("inputPhone").value;
-
-        var genders = document.getElementsByName("flexRadioDefault");
-        for (var i = 0; i < genders.length; i++) {
-            if (genders[i].checked) {
-                var gender = genders[i].value;
-            }
-        }
-        console.log("gender: " + gender);
-
-        var phone = document.getElementById("inputPhone").value;
-        //var birthDate = "1911-11-11T00:00:00";
-        var birthDate = document.getElementById("inputBirthDate").value;
-        var salary = document.getElementById("inputSalary").value;
-        var university = document.getElementById("inputUniversity").value;
-        var degree = document.getElementById("inputDegree").value;
-        var gpa = document.getElementById("inputGpa").value;
-
-        var dataInput = {
-            "nik": nik,
-            "firstName": firstName,
-            "lastName": lastName,
-            "phone": phone,
-            "birthDate": birthDate,
-            "gender": parseInt(gender),
-            "salary": parseInt(salary),
-            "email": email,
-            "password": password,
-            "degree": degree,
-            "GPA": gpa,
-            "UniversityId": parseInt(university)
-        };
-
-        var json = JSON.stringify(dataInput);
-        console.log(json);
-
-        $.ajax({
-            type: "POST",
-            url: "https://localhost:44300/api/persons/register",
-            data: json,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (msg) {
-                alert('In Ajax');
-            }
-        });
-
-        //if (nama_mahasiswa != "" && tanggal_masuk != "" && alamat != "" && jurusan != "" && (document.getElementById("jenkel1").checked == true || document.getElementById("jenkel2").checked == true)) {
-            //$.ajax({
-            //    type: 'POST',
-            //    url: "form_action.php",
-            //    data: data,
-            //    success: function () {
-            //        $('.data').load("data.php");
-            //        document.getElementById("id").value = "";
-            //        document.getElementById("form-data").reset();
-            //    }, error: function (response) {
-            //        console.log(response.responseText);
-            //    }
-            //});
-
-        //} 
-    });
 
 </script>

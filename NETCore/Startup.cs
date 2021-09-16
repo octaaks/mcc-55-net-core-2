@@ -79,11 +79,22 @@ namespace NETCore
             });
 
             //CORS
-            services.AddCors(c =>
+            
+            //services.AddCors(c =>
+            //{
+            //    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            //    //c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44300"));
+            //    //c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44359"));
+            //});
+            services.AddCors(options =>
             {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
-                //c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44300"));
-                //c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44359"));
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin();
+                        builder.AllowAnyHeader();
+                        builder.AllowAnyMethod();
+                    });
             });
         }
 
