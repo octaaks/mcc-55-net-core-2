@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NETCore.Repository.Interface;
 using System;
@@ -84,6 +85,8 @@ namespace NETCore.Base
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
+
+        [EnableCors("AllowAllOrigins")]
         [HttpGet("{key}")]
         public ActionResult Get(Key key)
         {
@@ -136,6 +139,8 @@ namespace NETCore.Base
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
+
+        [EnableCors("AllowAllOrigins")]
         [HttpDelete("{key}")]
         public ActionResult Delete(Key key)
         {

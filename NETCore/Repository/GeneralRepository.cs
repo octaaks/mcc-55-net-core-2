@@ -24,6 +24,7 @@ namespace NETCore.Repository
             dbSet = myContext.Set<Entity>();
         }
 
+
         public int Delete(Key key)
         {
             var data = dbSet.Find(key);

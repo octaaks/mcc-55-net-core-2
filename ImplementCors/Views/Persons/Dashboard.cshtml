@@ -1,0 +1,225 @@
+﻿@{
+    Layout = (string)ViewData["Layout"] ?? "_LayoutAdmin";
+    ViewData["Title"] = "Persons API";
+}
+<html>
+<head>
+    <title>Title</title>
+    <link href="~/fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
+    <!-- CSS Boostrap -->
+    @*<link rel="styles heet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">*@
+    <!-- CSS Bootstrap Datepicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/css/persons.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card shadow p-3 mt-3 p-lg-3">
+                    <div id="chartGender"></div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow p-3 mt-3 p-lg-3">
+                    <div id="chartSalary"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+    $(document).ready(function () {
+        //gender
+        var male = 0;
+        var female = 0;
+
+        //salary
+        var gol1 = 0;
+        var gol2 = 0;
+        var gol3 = 0;
+        var gol4 = 0;
+        var gol5 = 0;
+
+        $.ajax({
+            url: "https://localhost:44300/api/persons/"
+        }).done((result) => {
+            console.log(result);
+
+            for (var i = 0; i < result.data.length; i++) {
+                if (result.data[i].gender == "Male") {
+                    male++;
+                } else {
+                    female++;
+                }
+
+                if (result.data[i].salary < 25000000) {
+                    gol1++;
+                } else if (result.data[i].salary < 50000000) {
+                    gol2++;
+                } else if (result.data[i].salary < 75000000) {
+                    gol3++;
+                } else if (result.data[i].salary < 100000000) {
+                    gol4++;
+                } else {
+                    gol5++;
+                }
+            }
+            console.log(gol1,gol2,gol3,gol4,gol5);
+
+            var optionsGender = {
+                series: [male, female],
+                chart: {
+                    type: 'pie',
+                },
+                labels: ['Male', 'Female'],
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }],
+                title: {
+                    text: 'Gender Chart',
+                    floating: true,
+                    align: 'center',
+                    style: {
+                        color: '#444'
+                    }
+                }
+            };
+
+            var chartGender = new ApexCharts(document.querySelector("#chartGender"), optionsGender);
+            chartGender.render();
+
+            var optionsSalary = {
+                chart: {
+                    type: 'column'
+                },
+                series: [{
+                    name: 'sales',
+                    data: [44, 1, 2, 4, 1]
+                }],
+                xaxis: {
+                    categories: [1991, 1992, 1993, 1994, 1995],
+                    //categories: ["< 25jt", "< 50jt", "< 75jt", "< 100jt", "100jt ++"]
+                },
+                yaxis: {
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false,
+                    }
+                },
+                title: {
+                    text: 'Salary Chart',
+                    floating: true,
+                    align: 'center',
+                    style: {
+                        color: '#444'
+                    }
+                }
+            };
+
+
+
+            var options = {
+                series: [{
+                    name: 'Inflation',
+                    data: [gol1,gol2,gol3,gol4,gol5]
+                }],
+                chart: {
+                    height: 350,
+                    type: 'bar',
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 10,
+                        dataLabels: {
+                            position: 'top', // top, center, bottom
+                        },
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function (val) {
+                        return val + "";
+                    },
+                    offsetY: -20,
+                    style: {
+                        fontSize: '12px',
+                        colors: ["#304758"]
+                    }
+                },
+
+                xaxis: {
+                    categories: ["< 25jt", "< 50jt", "< 75jt", "< 100jt", "100jt ++"],
+                    //position: 'top',
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false
+                    },
+                    crosshairs: {
+                        fill: {
+                            type: 'gradient',
+                            gradient: {
+                                colorFrom: '#D8E3F0',
+                                colorTo: '#BED1E6',
+                                stops: [0, 100],
+                                opacityFrom: 0.4,
+                                opacityTo: 0.5,
+                            }
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                    }
+                },
+                yaxis: {
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false,
+                    },
+                    labels: {
+                        show: false,
+                        formatter: function (val) {
+                            return val;
+                        }
+                    }
+
+                },
+                title: {
+                    text: 'Range Salary',
+                    floating: true,
+                    align: 'center',
+                    style: {
+                        color: '#444'
+                    }
+                }
+            };
+
+            var chart = new ApexCharts(document.querySelector("#chartSalary"), options);
+            chart.render();
+
+        }).fail((result) => {
+            //
+        });
+
+
+    });
+    
+</script>
