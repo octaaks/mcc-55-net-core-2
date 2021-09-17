@@ -26,47 +26,6 @@
             </div>
         </div>
 
-        <table id="example" class="display nowrap" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                </tr>
-                <tr>
-                    <td>Garrett Winters</td>
-                    <td>Accountant</td>
-                    <td>Tokyo</td>
-                    <td>63</td>
-                    <td>2011/07/25</td>
-                    <td>$170,750</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
-                </tr>
-            </tfoot>
-        </table>
-
         <div class="card shadow p-3 mt-3 p-lg-3">
             <table id="table_id" class="display nowrap" style="width:100%">
                 <thead>
@@ -411,23 +370,26 @@
                 "autoWidth": true
             }
         ],
+        dom: 'Bfrtip',
         buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
             {
                 extend: 'excelHtml5',
                 exportOptions: {
-                    columns: [1]
-                },
-                className: 'btn btn-sm btn-outline-secondary',
-                bom: true
+                    columns: ':visible'
+                }
             },
             {
                 extend: 'pdfHtml5',
                 exportOptions: {
-                    columns: [1]
-                },
-                className: 'btn btn-sm btn-outline-secondary',
-                bom: true
-            },
+                    columns: [0, 1, 2, 5]
+                }
+            }
         ]
     });
 

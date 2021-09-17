@@ -16,5 +16,9 @@ namespace ImplementCors.Controllers
         {
             return View();
         }
+        public IActionResult Table()
+        {
+            return View();
+        }
     }
 }

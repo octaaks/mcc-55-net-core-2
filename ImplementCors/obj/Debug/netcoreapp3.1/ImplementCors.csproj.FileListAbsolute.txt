@@ -228,3 +228,5 @@ F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razo
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Persons\Index.cshtml.g.cs
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutAdmin.cshtml.g.cs
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Persons\Dashboard.cshtml.g.cs
+F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Persons\Table.cshtml.g.cs
+F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutTest.cshtml.g.cs
