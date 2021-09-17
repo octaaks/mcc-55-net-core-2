@@ -121,7 +121,7 @@
                     </div>
                     <div id="modal-content" class="modal-body">
 
-                        <form method="post" action="" id="contactform" class="needs-validation" novalidate>
+                        <form method="post" action="" id="contactform" class="was-validated">
 
                             <div class="form-row">
                                 <div class="col mb-3">
@@ -375,21 +375,21 @@
             {
                 extend: 'copyHtml5',
                 exportOptions: {
-                    columns: [0, ':visible']
+                    columns: [1, 2, 3, 4, 5]
                 }
             },
             {
                 extend: 'excelHtml5',
                 exportOptions: {
-                    columns: ':visible'
+                    columns: [1, 2, 3, 4, 5]
                 }
             },
             {
                 extend: 'pdfHtml5',
                 exportOptions: {
-                    columns: [0, 1, 2, 5]
+                    columns: [1, 2, 3, 4, 5]
                 }
-            }
+            },
         ]
     });
 
@@ -423,7 +423,6 @@
 
 
         $("#register").click(function (event) {
-
 
             event.preventDefault();
 
@@ -491,7 +490,6 @@
                 data: JSON.stringify(dataInput),
                 success: function (data) {
                     console.log(data);
-
                     $('#contactform')[0].reset();
                     $('#registerModal').modal('toggle');
 
@@ -512,12 +510,14 @@
                         icon: 'error',
                         title: 'Oops...',
                         text: 'Something went wrong!',
-                        //footer: '<a href="">Why do I have this issue?</a>'
                     });
-                    //document.getElementById("inputUniversity").className = "form-control is-invalid";
-                    //$("#messageUniv").html(` ${err.errors.Name[0]}`);
+
                 }
             });
+        });
+
+        $("#registerx").click(function (event) {
+
         });
 
         //reload button
