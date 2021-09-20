@@ -26,7 +26,7 @@
     <!-- summernote -->
     <link rel="stylesheet" href="~/adminlte/plugins/summernote/summernote-bs4.min.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    @*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">*@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.0/css/buttons.dataTables.min.css" />
 </head>
@@ -34,14 +34,14 @@
     <div class="wrapper">
 
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="main-header navbar navbar-expand navbar-dark navbar-purple">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Home</a>
+                    <a href="/" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
@@ -152,20 +152,20 @@
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-                <li class="nav-item">
+                @*<li class="nav-item">
                     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
-                </li>
+                </li>*@
             </ul>
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar elevation-4 sidebar-dark-indigo">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="~/adminlte/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+            <a href="index3.html" class="brand-link navbar-purple">
+                <img src="~/zexal.png" alt="AdminLTE Logo" class="brand-image" style="opacity: 1; font-family:'hiragana tfb';">
+                <span class="brand-text"><b>かっとビング</b></span>
             </a>
 
             <!-- Sidebar -->
@@ -176,7 +176,7 @@
                         <img src="~/iron_cat.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Octa Alief</a>
+                        <a href="#" class="d-block">Octa A.</a>
                     </div>
                 </div>
 

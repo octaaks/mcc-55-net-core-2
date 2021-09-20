@@ -16,13 +16,23 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <div class="card shadow p-3 mt-3 p-lg-3">
-                    <div id="chartGender"></div>
+                <div class="card shadow mt-3">
+                    <div class="card-header">
+                        Gender Chart
+                    </div>
+                    <div class="card-body">
+                        <div id="chartGender"></div>
+                    </div>
                 </div>
             </div>
             <div class="col">
-                <div class="card shadow p-3 mt-3 p-lg-3">
-                    <div id="chartSalary"></div>
+                <div class="card shadow mt-3">
+                    <div class="card-header">
+                        Salary Range
+                    </div>
+                    <div class="card-body">
+                        <div id="chartSalary"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,8 +85,42 @@
                 series: [male, female],
                 chart: {
                     type: 'pie',
+                    toolbar: {
+                        show: true,
+                        offsetX: 0,
+                        offsetY: 0,
+                        tools: {
+                            download: true,
+                            selection: true,
+                            zoom: true,
+                            zoomin: true,
+                            zoomout: true,
+                            pan: true,
+                            reset: true | '<img src="/static/icons/reset.png" width="20">',
+                            customIcons: []
+                        },
+                        export: {
+                            csv: {
+                                filename: undefined,
+                                columnDelimiter: ',',
+                                headerCategory: 'category',
+                                headerValue: 'value',
+                                dateFormatter(timestamp) {
+                                    return new Date(timestamp).toDateString()
+                                }
+                            },
+                            svg: {
+                                filename: undefined,
+                            },
+                            png: {
+                                filename: undefined,
+                            }
+                        },
+                        autoSelected: 'zoom'
+                    }
                 },
                 labels: ['Male', 'Female'],
+                colors: ['#439EE5', '#F981EB'],
                 responsive: [{
                     breakpoint: 480,
                     options: {
@@ -87,54 +131,24 @@
                             position: 'bottom'
                         }
                     }
-                }],
-                title: {
-                    text: 'Gender Chart',
-                    floating: true,
-                    align: 'center',
-                    style: {
-                        color: '#444'
-                    }
-                }
+                }]
+                //title: {
+                //    text: "Gender Chart",
+                //    align: 'center',
+                //    margin: 10,
+                //    offsetX: 0,
+                //    offsetY: 0,
+                //    floating: false,
+                //    style: {
+                //        fontWeight: 'bold',
+                //        fontFamily: 'Helvetica, Arial, sans-serif',
+                //        color: '#263238'
+                //    },
+                //}
             };
 
             var chartGender = new ApexCharts(document.querySelector("#chartGender"), optionsGender);
             chartGender.render();
-
-            var optionsSalary = {
-                chart: {
-                    type: 'column'
-                },
-                series: [{
-                    name: 'sales',
-                    data: [44, 1, 2, 4, 1]
-                }],
-                xaxis: {
-                    categories: [1991, 1992, 1993, 1994, 1995],
-                    tooltip: {
-                        enabled: true,
-                    }
-                    //categories: ["< 25jt", "< 50jt", "< 75jt", "< 100jt", "100jt ++"]
-                },
-                yaxis: {
-                    axisBorder: {
-                        show: false
-                    },
-                    axisTicks: {
-                        show: false,
-                    }
-                },
-                title: {
-                    text: 'Salary Chart',
-                    floating: true,
-                    align: 'center',
-                    style: {
-                        color: '#444'
-                    }
-                }
-            };
-
-
 
             var options = {
                 series: [{
@@ -204,15 +218,20 @@
                         }
                     }
 
-                },
-                title: {
-                    text: 'Range Salary',
-                    floating: true,
-                    align: 'center',
-                    style: {
-                        color: '#444'
-                    }
                 }
+                //title: {
+                //    text: "Salary Range",
+                //    align: 'center',
+                //    margin: 10,
+                //    offsetX: 0,
+                //    offsetY: 0,
+                //    floating: false,
+                //    style: {
+                //        fontWeight: 'bold',
+                //        fontFamily: 'Helvetica, Arial, sans-serif',
+                //        color: '#263238'
+                //    },
+                //}
             };
 
             var chart = new ApexCharts(document.querySelector("#chartSalary"), options);
