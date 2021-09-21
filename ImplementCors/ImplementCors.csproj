@@ -9,8 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Base\Controllers\" />
-    <Folder Include="Base\Urls\" />
+    <ProjectReference Include="..\NETCore\NETCore.csproj" />
   </ItemGroup>
 
 </Project>

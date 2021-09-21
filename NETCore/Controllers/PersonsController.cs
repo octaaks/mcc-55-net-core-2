@@ -39,13 +39,15 @@ namespace NETCore.Controllers
             var getPerson = repository.GetPersonVMs();
             if (getPerson != null)
             {
-                var get = Ok(new
-                {
-                    status = HttpStatusCode.OK,
-                    result = getPerson,
-                    message = "Success"
-                });
-                return get;
+                //var get = Ok(new
+                //{
+                //    status = HttpStatusCode.OK,
+                //    result = getPerson,
+                //    message = "Success"
+                //});
+                //return get;
+
+                return Ok(getPerson);
             }
             else
             {
@@ -73,13 +75,15 @@ namespace NETCore.Controllers
             var getPerson = repository.GetPersonVMs(NIK);
             if (getPerson != null)
             {
-                var get = Ok(new
-                {
-                    status = HttpStatusCode.OK,
-                    result = getPerson,
-                    message = "Success"
-                });
-                return get;
+                //var get = Ok(new
+                //{
+                //    status = HttpStatusCode.OK,
+                //    result = getPerson,
+                //    message = "Success"
+                //});
+                //return get;
+
+                return Ok(getPerson);
             }
             else
             {

@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NETCore</name>
+    </assembly>
+    <members>
+        <member name="M:NETCore.Base.BaseController`3.Insert(`0)">
+            <summary>
+            Insert data
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NETCore.Base.BaseController`3.Get">
+            <summary>
+            Get All data 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NETCore.Base.BaseController`3.Get(`2)">
+            <summary>
+            Get data by NIK
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NETCore.Base.BaseController`3.Update(`0)">
+            <summary>
+            Update data
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NETCore.Base.BaseController`3.Delete(`2)">
+            <summary>
+            Delete data by NIK
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NETCore.Controllers.AccountsController.ForgetPassword(NETCore.ViewModel.EmailVM)">
+            <summary>
+            Send reset password link to the email
+            </summary>
+            <param name="emailVM"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NETCore.Controllers.AccountsController.ResetPassword(System.String,System.String)">
+            <summary>
+            Generate new password then send to the email
+            </summary>
+            <param name="Email"></param>
+            <param name="Token"></param>
+            <returns></returns>
+            
+        </member>
+        <member name="M:NETCore.Controllers.AccountsController.ChangePassword(NETCore.ViewModel.ChangePasswordVM)">
+            <summary>
+            Change account's password
+            </summary>
+            <param name="cpVM"></param>
+            <returns></returns>
+            
+        </member>
+        <member name="M:NETCore.Controllers.PersonsController.GetPerson">
+            <summary>
+            Get all persons data
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:NETCore.Controllers.PersonsController.GetPerson(System.String)">
+             <summary>
+             Get person data by NIK
+             </summary>
+             <param name="NIK"></param>
+             <returns></returns>
+            
+        </member>
+        <member name="M:NETCore.Controllers.PersonsController.Insert(NETCore.ViewModel.PersonVM)">
+            <summary>
+            Register/Insert new person data
+            </summary>
+            <param name="personVM"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NETCore.Controllers.PersonsController.Login(NETCore.ViewModel.LoginVM)">
+            <summary>
+            Login person's account
+            </summary>
+            <param name="loginVM"></param>
+            <returns></returns>
+            
+        </member>
+    </members>
+</doc>

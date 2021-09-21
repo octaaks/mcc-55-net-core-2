@@ -61,13 +61,15 @@ namespace NETCore.Base
         {
             try
             {
-                return Ok(new
-                {
-                    data = repository.Get(),
-                    /*statusCode = StatusCode(200),*/
-                    status = HttpStatusCode.OK,
-                    message = "Success"
-                });
+                //return Ok(new
+                //{
+                //    data = repository.Get(),
+                //    /*statusCode = StatusCode(200),*/
+                //    status = HttpStatusCode.OK,
+                //    message = "Success"
+                //});
+
+                return Ok(repository.Get());
             }
             catch
             {
@@ -92,13 +94,15 @@ namespace NETCore.Base
         {
             try
             {
-                return Ok(new
-                {
-                    data = repository.Get(key),
-                    /*StatusCode(200),*/
-                    status = HttpStatusCode.OK,
-                    message = "Success"
-                });
+                //return Ok(new
+                //{
+                //    data = repository.Get(key),
+                //    /*StatusCode(200),*/
+                //    status = HttpStatusCode.OK,
+                //    message = "Success"
+                //});
+
+                return Ok(repository.Get(key));
             }
             catch
             {

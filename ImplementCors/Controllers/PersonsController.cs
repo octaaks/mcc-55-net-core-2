@@ -1,13 +1,33 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ImplementCors.Base.Controllers;
+using ImplementCors.Repositories.Data;
+using Microsoft.AspNetCore.Mvc;
+using NETCore.Models;
+using NETCore.ViewModel;
 using System.Threading.Tasks;
 
 namespace ImplementCors.Controllers
 {
-    public class PersonsController : Controller
+    public class PersonsController : BaseController<Person, PersonRepository, string>
     {
+        private readonly PersonRepository repository;
+        public PersonsController(PersonRepository repository) : base(repository)
+        {
+            this.repository = repository;
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetPerson()
+        {
+            var result = await repository.GetPerson();
+            return Json(result);
+        }
+
+        [HttpGet("GetPersonBy/{nik}")]
+        public async Task<JsonResult> GetPersonBy(string nik)
+        {
+            var result = await repository.GetPersonById(nik);
+            return Json(result);
+        }
         public IActionResult Index()
         {
             return View();
