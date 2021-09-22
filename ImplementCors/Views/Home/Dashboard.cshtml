@@ -60,20 +60,20 @@
         }).done((result) => {
             console.log(result);
 
-            for (var i = 0; i < result.data.length; i++) {
-                if (result.data[i].gender == "Male") {
+            for (var i = 0; i < result.length; i++) {
+                if (result[i].gender == "Male") {
                     male++;
                 } else {
                     female++;
                 }
 
-                if (result.data[i].salary < 25000000) {
+                if (result[i].salary < 25000000) {
                     gol1++;
-                } else if (result.data[i].salary < 50000000) {
+                } else if (result[i].salary < 50000000) {
                     gol2++;
-                } else if (result.data[i].salary < 75000000) {
+                } else if (result[i].salary < 75000000) {
                     gol3++;
-                } else if (result.data[i].salary < 100000000) {
+                } else if (result[i].salary < 100000000) {
                     gol4++;
                 } else {
                     gol5++;

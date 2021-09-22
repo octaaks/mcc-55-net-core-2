@@ -1,4 +1,6 @@
 ﻿using ImplementCors.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -27,13 +29,17 @@ namespace ImplementCors.Controllers
         {
             return View();
         }
-
+        
+        [Authorize]
         public IActionResult TablePerson()
         {
             return View();
         }
+
+        [Authorize]
         public IActionResult Dashboard()
         {
+            ViewBag.Token = HttpContext.Session.GetString("JWToken");
             return View();
         }
 

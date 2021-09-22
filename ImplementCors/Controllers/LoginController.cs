@@ -1,5 +1,6 @@
 ﻿using ImplementCors.Base.Controllers;
 using ImplementCors.Repositories.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NETCore.Models;
@@ -44,6 +45,14 @@ namespace ImplementCors.Controllers
             //HttpContext.Session.SetString("Email", login.Email);
 
             return RedirectToAction("dashboard", "home");
+        }
+
+        [Authorize]
+        [HttpGet("Logout/")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("index","home");
         }
     }
 }
