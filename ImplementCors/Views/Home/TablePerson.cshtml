@@ -7,7 +7,7 @@
     <title>Title</title>
     <link href="~/fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
     <!-- CSS Boostrap -->
-    @*<link rel="styles heet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">*@
+    <link rel="styles heet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <!-- CSS Bootstrap Datepicker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="~/css/persons.css" />
@@ -308,7 +308,7 @@
     </div>
 </body>
 </html>
-@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>*@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
@@ -336,7 +336,7 @@
         "order": [[1, 'asc']],
         "filter": true,
         "ajax": {
-            "url": "persons/getperson",
+            "url": "/persons/getperson",
             "datatype": "json",
             "dataSrc": ""
         },
@@ -527,7 +527,7 @@
 
         //get all university
         $.ajax({
-            url: "universities/getall"
+            url: "/universities/getall"
         }).done((result) => {
             var text = "";
             console.log(result);
@@ -543,7 +543,7 @@
 
         //get all personVM
         $.ajax({
-            url: "persons/getperson"
+            url: "/persons/getperson"
         }).done((result) => {
             console.log(result);
         }).fail((result) => {

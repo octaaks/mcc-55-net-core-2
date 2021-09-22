@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ImplementCors.Controllers
 {
+    [Route("[controller]")]
     public class PersonsController : BaseController<Person, PersonRepository, string>
     {
         private readonly PersonRepository repository;
@@ -15,23 +16,26 @@ namespace ImplementCors.Controllers
             this.repository = repository;
         }
 
-        [HttpGet]
+        [HttpGet("GetPerson")]
         public async Task<JsonResult> GetPerson()
         {
             var result = await repository.GetPerson();
             return Json(result);
         }
 
-        [HttpGet("GetPersonBy/{nik}")]
-        public async Task<JsonResult> GetPersonBy(string nik)
+        [HttpGet("GetPersonById/{nik}")]
+        //[HttpGet]
+        public async Task<JsonResult> GetPersonById(string nik)
         {
             var result = await repository.GetPersonById(nik);
             return Json(result);
         }
+
         public IActionResult Index()
         {
             return View();
         }
+
         public IActionResult Dashboard()
         {
             return View();

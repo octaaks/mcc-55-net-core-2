@@ -42,6 +42,7 @@ namespace ImplementCors.Repositories.Data
         public async Task<PersonVM> GetPersonById(string nik)
         {
             PersonVM register = new PersonVM();
+            //PersonVM register = null;
 
             using (var response = await httpClient.GetAsync(request + "GetPerson/" + nik))
             {

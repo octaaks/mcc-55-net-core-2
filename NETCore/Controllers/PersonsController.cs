@@ -7,6 +7,7 @@ using NETCore.Base;
 using NETCore.Models;
 using NETCore.Repository.Data;
 using NETCore.ViewModel;
+using NETCore.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -68,7 +69,8 @@ namespace NETCore.Controllers
         /// <returns></returns>
         ///
 
-        [Authorize]
+        //[Authorize]
+        [AllowAnonymous]
         [HttpGet("GetPerson/{NIK}")]
         public ActionResult GetPerson(string NIK)
         {
@@ -214,7 +216,14 @@ namespace NETCore.Controllers
 
                 var token = new JwtSecurityToken(_configuration["Jwt:Issuer"], _configuration["Jwt:Audience"], claim, expires: DateTime.UtcNow.AddDays(1), signingCredentials: signIn);
 
-                return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+                //return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+                //return Ok(new JWTokenVM { Token = token, Messages = "Login Sukses" });
+
+                return Ok(new JWTokenVM
+                {
+                    Token = new JwtSecurityTokenHandler().WriteToken(token),
+                    Messages = "Login Sukses"
+                });
 
                 //return Ok(new
                 //{
