@@ -8,12 +8,14 @@
     <link href="~/fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
     <!-- CSS Boostrap -->
     @*<link rel="styles heet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">*@
-    <!-- CSS Bootstrap Datepicker -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="~/css/persons.css" />
-    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">*@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- CSS Bootstrap Datepicker -->
+    <link rel="stylesheet" href="~/css/persons.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
 </head>
 <body>
     <div class="container">
@@ -230,11 +232,11 @@
                                                 Please insert date of birth.
                                             </div>
                                         </div>*@
-                                    <div class="input-group date" data-provide="datepicker">
+                                    <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
                                         </div>
-                                        <input type="text" name="birthdate" class="form-control datepicker" data-date-format="yyyy-mm-dd" id="inputBirthDate" placeholder="Birth Date" autocomplete="off" autocorrect="off"
+                                        <input type="text" class="form-control" data-date-format="yyyy-mm-dd" id="inputBirthDate" placeholder="Birth Date" autocomplete="off" autocorrect="off"
                                                autocapitalize="off" spellcheck="false" required>
                                         <div class="input-group-addon">
                                             <span class="glyphicon glyphicon-th"></span>
@@ -243,6 +245,7 @@
                                             Please insert date of birth.
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
 
@@ -315,10 +318,8 @@
     </div>
 </body>
 </html>
-@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>*@
-@*<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>*@
-
-<script src="~/adminlte/plugins/jquery/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
@@ -331,8 +332,8 @@
 <script src="~/js/Persons.js"></script>
 
 <script>
-    $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd'
+    $(function () {
+        $("#inputBirthDate").datepicker();
     });
 
     //DATATABLEs
@@ -463,32 +464,32 @@
                         if (form.checkValidity() === true) {
                             event.preventDefault();
                             var obj = {
-                                    "nik": $('#inputNik').val(),
-                                    "firstName": $('#inputFirstName').val(),
-                                    "lastName": $('#inputLastName').val(),
-                                    "phone": $('#inputPhone').val(),
-                                    "birthDate": moment($('#inputBirthDate').val()).format("YYYY-MM-DDTHH:mm:ss"),
-                                    "gender": parseInt($('#gender').val()),
-                                    "salary": parseInt($('#inputSalary').val()),
-                                    "email": $('#inputEmail').val(),
-                                    "password": $('#inputPassword').val(),
-                                    "degree": $('#inputDegree').val(),
-                                    "GPA": $('#inputGpa').val(),
-                                    "UniversityId": parseInt($('#inputUniversity').val())
+                                "nik": $('#inputNik').val(),
+                                "firstName": $('#inputFirstName').val(),
+                                "lastName": $('#inputLastName').val(),
+                                "phone": $('#inputPhone').val(),
+                                "birthDate": moment($('#inputBirthDate').val()).format("YYYY-MM-DDTHH:mm:ss"),
+                                "gender": parseInt($('#gender').val()),
+                                "salary": parseInt($('#inputSalary').val()),
+                                "email": $('#inputEmail').val(),
+                                "password": $('#inputPassword').val(),
+                                "degree": $('#inputDegree').val(),
+                                "GPA": $('#inputGpa').val(),
+                                "UniversityId": parseInt($('#inputUniversity').val())
 
-                                    //"nik": "907",
-                                    //"firstName": "Atta",
-                                    //"lastName": "Thunder",
-                                    //"phone": "05644712",
-                                    //"birthDate": "1911-11-11T00:00:00",
-                                    //"gender": 0,
-                                    //"salary": 999999999,
-                                    //"email": "dsadas@gmail.com",
-                                    //"password": "root",
-                                    //"degree": "Prank Master",
-                                    //"GPA": "0.1",
-                                    //"UniversityId": 1
-                                };
+                                //"nik": "907",
+                                //"firstName": "Atta",
+                                //"lastName": "Thunder",
+                                //"phone": "05644712",
+                                //"birthDate": "1911-11-11T00:00:00",
+                                //"gender": 0,
+                                //"salary": 999999999,
+                                //"email": "dsadas@gmail.com",
+                                //"password": "root",
+                                //"degree": "Prank Master",
+                                //"GPA": "0.1",
+                                //"UniversityId": 1
+                            };
 
                             var data = JSON.stringify(obj);
 
