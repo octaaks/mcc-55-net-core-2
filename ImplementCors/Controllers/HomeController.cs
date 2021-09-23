@@ -29,8 +29,8 @@ namespace ImplementCors.Controllers
         {
             return View();
         }
-        
-        //[Authorize]
+
+        [Authorize(Roles = "Manager")]
         public IActionResult TablePerson()
         {
             return View();

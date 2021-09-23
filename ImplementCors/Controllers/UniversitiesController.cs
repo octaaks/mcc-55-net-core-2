@@ -6,7 +6,7 @@ using NETCore.Models;
 
 namespace ImplementCors.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class UniversitiesController : BaseController<University, UniversityRepository, int>
     {
         private readonly UniversityRepository repository;
