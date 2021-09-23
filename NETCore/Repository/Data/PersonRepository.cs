@@ -59,6 +59,12 @@ namespace NETCore.Repository.Data
                                 join u in myContext.Universities on
                                 e.UniversityId equals u.UniversityId
 
+                                join ar in myContext.AccountRoles on
+                                a.NIK equals ar.AccountId
+
+                                join r in myContext.Roles on
+                                ar.RoleId equals r.RoleId
+
                                 //join ar in myContext.AccountRoles on a.NIK equals ar.AccountId
                                 //join r in myContext.Roles on ar.RoleId equals r.RoleId
 
@@ -78,7 +84,7 @@ namespace NETCore.Repository.Data
                                     Degree = e.Degree,
                                     GPA = e.GPA,
                                     UniversityId = u.UniversityId,
-                                    //Role = String.Concat(r.Name);
+                                    Roles = ar.Role.Name
                                 }).Where(p => p.NIK == NIK).First();
             return getPersonVMs;
         }

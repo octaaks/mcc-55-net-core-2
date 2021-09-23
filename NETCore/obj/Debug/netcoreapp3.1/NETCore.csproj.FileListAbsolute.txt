@@ -441,4 +441,3 @@ F:\OAX\DOC\_Project\mcc-55-net-core-2\NETCore\obj\Debug\netcoreapp3.1\NETCore.dl
 F:\OAX\DOC\_Project\mcc-55-net-core-2\NETCore\obj\Debug\netcoreapp3.1\NETCore.xml
 F:\OAX\DOC\_Project\mcc-55-net-core-2\NETCore\obj\Debug\netcoreapp3.1\NETCore.pdb
 F:\OAX\DOC\_Project\mcc-55-net-core-2\NETCore\obj\Debug\netcoreapp3.1\NETCore.genruntimeconfig.cache
-F:\OAX\DOC\_Project\mcc-55-net-core-2\NETCore\obj\Debug\netcoreapp3.1\NETCore.csproj.AssemblyReference.cache

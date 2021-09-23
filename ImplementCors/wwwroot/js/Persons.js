@@ -1,21 +1,22 @@
 ﻿
+
+
 //show char info
 function show(nik) {
     $.ajax({
-        url: "https://localhost:44300/api/persons/" + nik
+        url: "/persons/getpersonbyid/" + nik
     }).done((result) => {
 
-        var roles = "";
         console.log(result);
 
-        for (let i = 0; i < result.account.accountRoles.length; i++) {
-            roles += `<li>${result.account.accountRoles[i].role.name}</li>`;
-        }
-
+        var gender = "";
         var genderIcon = "";
-        if (result.gender == "Male") {
+
+        if (result.gender == 0) {
+            gender = "Male"
             genderIcon = ' <i class="fas fa-mars"></i>';
         } else {
+            gender = "Female"
             genderIcon = ' <i class="fas fa-venus"></i>';
         }
 
@@ -23,15 +24,15 @@ function show(nik) {
         text += `
             <div>${result.nik}</div>
             <div>${result.firstName + " " + result.lastName}</div>
-            <div>${result.gender} ${genderIcon}</div>
+            <div>${gender} ${genderIcon}</div>
             <div>${result.email}</div>
             <div>(+62)${result.phone.slice(1, 99)}</div>
             <div>${moment(result.birthDate).format("dddd, MMMM Do YYYY")}</div>
             <div>Rp. ${result.salary.toLocaleString('it-IT')}</div>
-            <div>${result.account.profiling.educations.universities.name}</div>
-            <div>${result.account.profiling.educations.degree}</div>
-            <div>${result.account.profiling.educations.gpa}</div>
-            <div><ul>${roles}</ul></div>
+            <div>${result.universityId}</div>
+            <div>${result.degree}</div>
+            <div>${result.gpa}</div>
+            <div>${result.roles}</div>
         `
         $("#modal-data").html(text);
         $("#exampleModalLabel").html(result.firstName + " " + result.lastName + "'s Profile");
@@ -39,7 +40,6 @@ function show(nik) {
         console.log(result);
     });
 }
-
 
 //delete char
 function deletePerson(nik) {
@@ -56,26 +56,28 @@ function deletePerson(nik) {
         if (result.isConfirmed) {
 
             $.ajax({
-                url: 'https://localhost:44300/api/persons/' + nik,
+                url: "/persons/deleteperson/" + nik,
                 method: 'DELETE',
                 dataType: 'json',
                 contentType: 'application/json',
-                success: function () {
+                success: function (xhr, status, error) {
+                    var err = eval(xhr.responseJSON);
+                    console.log(err);
+
+                    mt.ajax.reload(function (json) {
+                        $('#table_id').val(json.lastInput);
+                    });
+
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
                 },
                 error: function (xhr, status, error) {
                     var err = eval(xhr.responseJSON);
-                    console.log(err.message);
+                    console.log(err);
                 }
-            });
-
-            Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-            )
-
-            mt.ajax.reload(function (json) {
-                $('#table_id').val(json.lastInput);
             });
         }
     })

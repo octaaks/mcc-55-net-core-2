@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using NETCore.ViewModel;
 using Newtonsoft.Json;
 using NETCore.Models;
+using System.Net;
+using System.Text;
 
 namespace ImplementCors.Repositories.Data
 {
@@ -50,6 +52,26 @@ namespace ImplementCors.Repositories.Data
                 register = JsonConvert.DeserializeObject<PersonVM>(apiResponse);
             }
             return register;
+        }
+
+
+        public HttpStatusCode DeletePerson(string id)
+        {
+            var result = httpClient.DeleteAsync(request + id).Result;
+            return result.StatusCode;
+        }
+
+        //public HttpStatusCode Register(PersonVM entity)
+        //{
+        //    StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+        //    var result = httpClient.PostAsync(address.link + request + "Register/", content).Result;
+        //    return result.StatusCode;
+        //}
+        public string Register(PersonVM entity)
+        {
+            StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+            var result = httpClient.PostAsync( request + "Register", content).Result.Content.ReadAsStringAsync().Result;
+            return result;
         }
     }
 }

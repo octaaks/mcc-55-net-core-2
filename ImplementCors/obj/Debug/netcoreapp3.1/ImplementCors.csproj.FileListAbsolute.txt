@@ -267,9 +267,13 @@ F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\scop
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\ImplementCors.TagHelpers.input.cache
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\ImplementCors.TagHelpers.output.cache
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\ImplementCors.RazorCoreGenerate.cache
+F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Home\Dashboard.cshtml.g.cs
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
+F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Home\LoginPage.cshtml.g.cs
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
+F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Home\TablePerson.cshtml.g.cs
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Latihan\Index.cshtml.g.cs
+F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Persons\Table.cshtml.g.cs
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Poke\Index.cshtml.g.cs
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
@@ -288,7 +292,3 @@ F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Impl
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\ImplementCors.dll
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\ImplementCors.pdb
 F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\ImplementCors.genruntimeconfig.cache
-F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Home\TablePerson.cshtml.g.cs
-F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Home\LoginPage.cshtml.g.cs
-F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
-F:\OAX\DOC\_Project\mcc-55-net-core-2\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Home\Dashboard.cshtml.g.cs

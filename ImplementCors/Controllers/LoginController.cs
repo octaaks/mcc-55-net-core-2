@@ -38,7 +38,7 @@ namespace ImplementCors.Controllers
 
             if (token == null)
             {
-                return RedirectToAction("index", "home");
+                return RedirectToAction("index");
             }
 
             HttpContext.Session.SetString("JWToken", token);

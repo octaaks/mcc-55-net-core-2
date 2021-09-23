@@ -30,7 +30,7 @@ namespace ImplementCors.Controllers
             return View();
         }
         
-        [Authorize]
+        //[Authorize]
         public IActionResult TablePerson()
         {
             return View();
