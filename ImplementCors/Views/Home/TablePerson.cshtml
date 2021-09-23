@@ -121,8 +121,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div id="modal-content" class="modal-body">
-
-                        <form method="post" action="" id="contactform" class="was-validated">
+                        <form id="contactform" class="needs-validation" novalidate>
+                            @*<form method="post" action="" id="contactform" class="was-validated">*@
 
                             <div class="form-row">
                                 <div class="col mb-3">
@@ -186,25 +186,31 @@
 
                             <div class="form-row">
                                 <div class="col-md mb-3">
-                                    <label for="inputGender">Gender</label>
+                                    <label for="gender">Gender</label>
                                     <div class="input-group">
                                         @*<input type="text" class="form-control" id="validationGender" placeholder="Gender" aria-describedby="inputGroupPrepend" required>
                                             <div class="invalid-feedback">
                                                 Please insert gender.
                                             </div>*@
 
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender" value="0" id="inputGender1" checked>
-                                            <label class="form-check-label" for="inputGender1">
-                                                Male
-                                            </label>
-                                        </div>
-                                        <div class="form-check ml-4">
-                                            <input class="form-check-input" type="radio" name="gender" value="1" id="inputGender2">
-                                            <label class="form-check-label" for="inputGender2">
-                                                Female
-                                            </label>
-                                        </div>
+                                        @*<div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gender" value="0" id="inputGender1" checked>
+                                                <label class="form-check-label" for="inputGender1">
+                                                    Male
+                                                </label>
+                                            </div>
+                                            <div class="form-check ml-4">
+                                                <input class="form-check-input" type="radio" name="gender" value="1" id="inputGender2">
+                                                <label class="form-check-label" for="inputGender2">
+                                                    Female
+                                                </label>
+                                            </div>*@
+
+                                        <select id="gender" class="custom-select" required>
+                                            <option value="0">Male</option>
+                                            <option value="1">Female</option>
+                                        </select>
+
                                         <div class="invalid-feedback">
                                             Please insert date of birth.
                                         </div>
@@ -296,7 +302,7 @@
                                 </div>
                             </div>
                             @*<button id="register" class="btn btn-primary" type="submit">Submit form</button>*@
-                            <button id="register" onclick="register()" type="submit" class="btn btn-primary">Submit form</button>
+                            <button class="btn btn-primary" type="submit" id="btnSubmit">Submit form</button>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -309,8 +315,10 @@
     </div>
 </body>
 </html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>*@
+@*<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>*@
+
+<script src="~/adminlte/plugins/jquery/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
@@ -404,7 +412,14 @@
 
     $(document).ready(function () {
 
-
+        //get all personVM
+        $.ajax({
+            url: "/persons/getperson"
+        }).done((result) => {
+            console.log(result);
+        }).fail((result) => {
+            console.log(result);
+        });
 
         //get all university
         $.ajax({
@@ -421,27 +436,6 @@
         }).fail((result) => {
             console.log(result);
         });
-
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        //(function () {
-        //    'use strict';
-        //    window.addEventListener('load', function () {
-        //        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        //        var forms = document.getElementsByClassName('needs-validation');
-
-        //        // Loop over them and prevent submission
-        //        var validation = Array.prototype.filter.call(forms, function (form) {
-        //            form.addEventListener('submit', function (event) {
-        //                if (form.checkValidity() === false) {
-        //                    event.preventDefault();
-        //                    event.stopPropagation();
-        //                }
-        //                form.classList.add('was-validated');
-        //            }, false);
-        //        });
-        //    }, false);
-        //})();
-
 
         (function () {
             'use strict';
@@ -469,21 +463,33 @@
                         if (form.checkValidity() === true) {
                             event.preventDefault();
                             var obj = {
-                                "NIK": $('#inputNik').val(),
-                                "Firstname": $('#inputFisrtName').val(),
-                                "Lastname": $('#inputLastName').val(),
-                                "Phone": $('#inputPhone').val(),
-                                "BirthDate": $('#inputBirthDate').val(),
-                                "Salary": $('#inputSalary').val(),
-                                "Email": $('#inputEmail').val(),
-                                "Gender": parseInt($('#inputGender').val()),
-                                "Password": $('#inputPassword').val(),
-                                "UniversityId": parseInt($('#inputUniversity').val()),
-                                "Degree": $('#inputDegree').val(),
-                                "GPA": $('#inputGpa').val()
-                            };
+                                    "nik": $('#inputNik').val(),
+                                    "firstName": $('#inputFirstName').val(),
+                                    "lastName": $('#inputLastName').val(),
+                                    "phone": $('#inputPhone').val(),
+                                    "birthDate": moment($('#inputBirthDate').val()).format("YYYY-MM-DDTHH:mm:ss"),
+                                    "gender": parseInt($('#gender').val()),
+                                    "salary": parseInt($('#inputSalary').val()),
+                                    "email": $('#inputEmail').val(),
+                                    "password": $('#inputPassword').val(),
+                                    "degree": $('#inputDegree').val(),
+                                    "GPA": $('#inputGpa').val(),
+                                    "UniversityId": parseInt($('#inputUniversity').val())
 
-                            console.log(JSON.stringify(obj));
+                                    //"nik": "907",
+                                    //"firstName": "Atta",
+                                    //"lastName": "Thunder",
+                                    //"phone": "05644712",
+                                    //"birthDate": "1911-11-11T00:00:00",
+                                    //"gender": 0,
+                                    //"salary": 999999999,
+                                    //"email": "dsadas@gmail.com",
+                                    //"password": "root",
+                                    //"degree": "Prank Master",
+                                    //"GPA": "0.1",
+                                    //"UniversityId": 1
+                                };
+
                             var data = JSON.stringify(obj);
 
                             register(data);
@@ -495,158 +501,39 @@
         })();
 
 
+        function register(data) {
+            console.log(data);
+
+            $.ajax({
+                type: "POST",
+                url: "/Persons/InsertPerson",
+                data: data,
+                traditional: true,
+                contentType: 'application/json',
+                dataType: "json",
+
+            }).done((result) => {
+                console.log(result);
+                $('#registerModal').modal('toggle');
+                $('#contactform')[0].reset();
+
+                Swal.fire(
+                    'Congratulations!',
+                    'Register succeed!'
+                );
+                mt.ajax.reload(function (json) {
+                    $('#table_id').val(json.lastInput);
+                });
+            }).fail((result) => {
+                console.log(result);
+            });
+        };
+
         //reload button
         $("#reloadBtn").click(function () {
             mt.ajax.reload(function (json) {
                 $('#table_id').val(json.lastInput);
             });
         });
-
-        //get all personVM
-        $.ajax({
-            url: "/persons/getperson"
-        }).done((result) => {
-            console.log(result);
-        }).fail((result) => {
-            console.log(result);
-        });
     });
-
-    function register(event) {
-        event.preventDefault();
-
-        var fields = [
-            document.getElementsByTagName("input")
-        ];
-        for (var i = 0; i < fields.length; i++) {
-            if (fields[i].value == "") {
-                fields[i].placeholder == "Tidak boleh kosong"
-                console.log(fields[i].placeholder);
-            }
-        };
-        //var data = $('.form-data').serialize();
-        var nik = document.getElementById("inputNik").value;
-        //if (nik == "") {
-        //    $('#invalid-nik').html('Please insert your NIK!');
-        //}
-        var firstName = document.getElementById("inputFirstName").value;
-        var lastName = document.getElementById("inputLastName").value;
-        var email = document.getElementById("inputEmail").value;
-        var password = document.getElementById("inputPassword").value;
-        var phone = document.getElementById("inputPhone").value;
-        var genders = document.getElementsByName("gender");
-        for (var i = 0; i < genders.length; i++) {
-            if (genders[i].checked) {
-                var gender = genders[i].value;
-            }
-        }
-        console.log("gender: " + gender);
-        var phone = document.getElementById("inputPhone").value;
-        //var birthDate = "1911-11-11T00:00:00";
-        var birthDate = document.getElementById("inputBirthDate").value;
-        var salary = document.getElementById("inputSalary").value;
-        var university = document.getElementById("inputUniversity").value;
-        var degree = document.getElementById("inputDegree").value;
-        var gpa = document.getElementById("inputGpa").value;
-
-        //var dataInput = {
-        //    "NIK": nik,
-        //    "FirstName": firstName,
-        //    "LastName": lastName,
-        //    "Phone": phone,
-        //    "BirthDate": birthDate,
-        //    "Gender": parseInt(gender),
-        //    "Salary": parseInt(salary),
-        //    "Email": email,
-        //    "Password": password,
-        //    "Degree": degree,
-        //    "GPA": gpa,
-        //    "UniversityId": parseInt(university)
-        //};
-
-        var dataInput = {
-            "NIK": $('#inputNik').val(),
-            "FirstName": $('#inputNik').val(),
-            "LastName": $('#inputNik').val(),
-            "Phone": $('#inputNik').val(),
-            "BirthDate": $('#inputNik').val(),
-            "Gender": parseInt($('#inputNik').val()),
-            "Salary": parseInt($('#inputNik').val()),
-            "Email": $('#inputNik').val(),
-            "Password": $('#inputNik').val(),
-            "Degree": $('#inputNik').val(),
-            "GPA": $('#inputNik').val(),
-            "UniversityId": parseInt($('#inputNik').val())
-        };
-
-        var json = JSON.stringify(dataInput);
-        console.log(json);
-
-        var dataObject = JSON.stringify(
-            {
-                'nik': '907',
-                'firstName': 'Atta',
-                'lastName': "Thunder",
-                'phone': "05644712",
-                'birthDate': "1911-11-11T00:00:00",
-                'gender': 0,
-                'salary': 999999999,
-                'email': "dsadas@gmail.com",
-                'password': "root",
-                'degree': "Prank Master",
-                'GPA': "0.1",
-                'UniversityId': 1
-            });
-
-        $.ajax({
-
-            //url: '/persons/register',
-            //method: 'POST',
-            //dataType: 'json',
-            //contentType: 'application/json',
-            //data: JSON.stringify(dataInput),
-            //success: function (data) {
-            //    console.log(data);
-            //    $('#contactform')[0].reset();
-            //    $('#registerModal').modal('toggle');
-            //    Swal.fire(
-            //        'Good job!',
-            //        'success'
-            //    );
-            //    mt.ajax.reload(function (json) {
-            //        $('#table_id').val(json.lastInput);
-            //    });
-            //    //location.reload();
-            //},
-            //error: function (xhr, status, error) {
-            //    var err = eval(xhr.responseJSON);
-            //    console.log(err);
-            //    Swal.fire({
-            //        icon: 'error',
-            //        title: 'Oops...',
-            //        text: 'Something went wrong!',
-            //    });
-            //}
-
-            url: '@Url.Action("Register", "Persons")',
-            type: "POST",
-            contentType: 'application/json',
-            dataType: "JSON",
-            data: dataObject,
-
-        }).done((result) => {
-            console.log(result);
-            $('#contactform')[0].reset();
-            $('#registerModal').modal('toggle');
-            Swal.fire(
-                'Good job!',
-                'success'
-            );
-            mt.ajax.reload(function (json) {
-                $('#table_id').val(json.lastInput);
-            });
-        }).fail((result) => {
-            console.log(result);
-        });
-    };
 </script>
